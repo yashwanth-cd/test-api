@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.json("Hello, world! This is your Render API.");
+  res.json({ message: "Hello, world! This is your Render API." });
 });
 
 app.get("/api/example", (req, res) => {
