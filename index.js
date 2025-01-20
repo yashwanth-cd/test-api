@@ -1,6 +1,10 @@
 const express = require("express");
+const cors = require("cors"); // Import cors package
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Use the CORS middleware for all routes
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello, world! This is your API.");
