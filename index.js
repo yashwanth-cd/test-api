@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors"); // Import cors package
 const { Pool } = require("pg"); // Import pg package for PostgreSQL
 const app = express();
+const createAuth0Client = require("@auth0/auth0-spa-js");
 const port = process.env.PORT || 3000;
 
 // PostgreSQL connection setup
@@ -25,6 +26,28 @@ app.get("/", (req, res) => {
 // Example endpoint
 app.get("/api/example", (req, res) => {
   res.json({ message: "This is an example endpoint." });
+});
+
+app.get("/api/auth", async (req, res) => {
+  const domain = process.env.AUTH0_DOMAIN;
+  const clientId = process.env.AUTH0_CLIENT_ID;
+
+  try {
+    const response = await createAuth0Client({
+      domain: domain,
+      client_id: clientId,
+    });
+
+    if (response.ok) {
+      res.json(response); // Returns access token, expiration, etc.
+    } else {
+      res.status(400).json({ message: "Auth0 Error", error: data });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
 });
 
 // POST route to insert data into PostgreSQL
