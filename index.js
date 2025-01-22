@@ -41,9 +41,6 @@ app.get("/api/auth", async (req, res) => {
   const auth0 = await createAuth0Client({
     domain: domain,
     clientId: clientId,
-    authorizationParams: {
-      redirect_uri: "http://localhost:3000",
-    },
   });
 
   try {
