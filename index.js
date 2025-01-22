@@ -3,6 +3,7 @@ const cors = require("cors"); // Import cors package
 const { Pool } = require("pg"); // Import pg package for PostgreSQL
 const app = express();
 const { AuthenticationClient } = require("auth0");
+const Auth0Client = require("@auth0/auth0-spa-js");
 const port = process.env.PORT || 3000;
 
 // PostgreSQL connection setup
@@ -32,13 +33,21 @@ app.get("/api/auth", async (req, res) => {
   const domain = process.env.AUTH0_DOMAIN; // Add this to your environment variables
   const clientId = process.env.AUTH0_CLIENT_ID; // Add this to your environment variables
 
-  const authClient = new AuthenticationClient({
-    domain: domain,
-    clientId: clientId,
+  // const authClient = new AuthenticationClient({
+  //   domain: domain,
+  //   clientId: clientId,
+  // });
+
+  const auth0 = await createAuth0Client({
+    domain: "<AUTH0_DOMAIN>",
+    clientId: "<AUTH0_CLIENT_ID>",
+    authorizationParams: {
+      redirect_uri: "<MY_CALLBACK_URL>",
+    },
   });
 
   try {
-    res.status(200).json(authClient); // Return the token to the frontend
+    res.status(200).json(auth0); // Return the token to the frontend
   } catch (error) {
     res.status(500).json({ message: "Auth0 Error", error: error.message });
   }
