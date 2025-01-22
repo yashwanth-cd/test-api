@@ -42,7 +42,7 @@ app.get("/api/auth", async (req, res) => {
     domain: domain,
     clientId: clientId,
     authorizationParams: {
-      redirect_uri: "<MY_CALLBACK_URL>",
+      redirect_uri: "http://localhost:3000",
     },
   });
 
