@@ -3,7 +3,7 @@ const cors = require("cors"); // Import cors package
 const { Pool } = require("pg"); // Import pg package for PostgreSQL
 const app = express();
 const { AuthenticationClient } = require("auth0");
-const Auth0Client = require("@auth0/auth0-spa-js");
+const createAuth0Client = require("@auth0/auth0-spa-js");
 const port = process.env.PORT || 3000;
 
 // PostgreSQL connection setup
