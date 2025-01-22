@@ -39,8 +39,8 @@ app.get("/api/auth", async (req, res) => {
   // });
 
   const auth0 = await createAuth0Client({
-    domain: "<AUTH0_DOMAIN>",
-    clientId: "<AUTH0_CLIENT_ID>",
+    domain: domain,
+    clientId: clientId,
     authorizationParams: {
       redirect_uri: "<MY_CALLBACK_URL>",
     },
